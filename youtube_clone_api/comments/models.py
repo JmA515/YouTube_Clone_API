@@ -7,8 +7,8 @@ from django.db.models.fields.related import ForeignKey
 class Comment(models.Model):
     body = models.CharField(max_length=200)
     videoId = models.CharField(max_length=50)
-    likes = models.IntegerField(max_length=10)
-    dislikes = models.IntegerField(max_length=10)
+    likes = models.IntegerField()
+    dislikes = models.IntegerField()
 
     def __str__(self):
         return self.body
@@ -16,4 +16,8 @@ class Comment(models.Model):
 
 class Reply(models.Model):
     body = models.CharField(max_length=200)
-    commentId = models.ForeignKey(Comment)
+    commentId = models.ForeignKey(
+        Comment, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.body
