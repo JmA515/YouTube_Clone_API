@@ -10,14 +10,7 @@ class Comment(models.Model):
     likes = models.IntegerField()
     dislikes = models.IntegerField()
 
-    def __str__(self):
-        return self.body
-
-
 class Reply(models.Model):
     body = models.CharField(max_length=200)
     commentId = models.ForeignKey(
         Comment, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.body
