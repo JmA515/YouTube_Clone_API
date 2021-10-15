@@ -39,16 +39,12 @@ class CommentDetail(APIView):
     def patch(self, request, pk, ld):
         comment = self.get_object(pk)
         serializer = CommentSerializer(comment)
-        # likes = Comment.likes
-        # dislikes = Comment.dislikes
         if ld == "likes":
-            Comment.likes += 1
-        elif ld == "dislikes":
-            Comment.dislikes += 1
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            comment.likes += 1
+        elif ld == "dislikes":     
+            comment.dislikes += 1
+        comment.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class Reply(APIView):
 
