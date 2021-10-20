@@ -11,8 +11,8 @@ from rest_framework import serializers, status
 # Create your views here.
 class CommentList(APIView):
 
-    def get(self, request):
-        comment = Comment.objects.all()
+    def get(self, request, videoId):
+        comment = Comment.objects.filter(videoId=videoId)
         serializer = CommentSerializer(comment, many=True)
         return Response(serializer.data)
 
